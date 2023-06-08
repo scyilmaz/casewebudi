@@ -20,4 +20,4 @@ You can start editing the page by modifying `App.jsx`. The page auto-updates as 
 
 To learn more about React Native, take a look at the following resources:
 
-- [React Native Documentation](https://reactnative.dev/docs/environment-setup) - learn about React Native features and API.
+- [React Native Documentation](https://reactnative.dev/docs/environment-setup) - learn about React Native features..

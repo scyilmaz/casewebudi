@@ -9,7 +9,6 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { showMessage } from "react-native-flash-message";
 import Icon from "react-native-vector-icons/Ionicons";
 import { API_ROUTES } from "../../api/apiroutes";

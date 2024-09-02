@@ -19,8 +19,8 @@ const ProfileScreen = ({ navigation }) => {
   const auth = useSelector((state) => state.auth.token);
   const user = useSelector((state) => state.auth.user);
   const [submitLoading, setSubmitLoading] = useState(false);
-  const [email, setEmail] = useState(user.email);
-  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -152,7 +152,7 @@ const ProfileScreen = ({ navigation }) => {
           <TextInput
             style={styles.TextInput}
             placeholder="E-posta adresi"
-            value={email}
+            value={email ? email : "boş"}
             onChangeText={(text) => setEmail(text)}
             editable={false}
           />

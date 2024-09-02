@@ -13,41 +13,61 @@ import { useSelector } from "react-redux";
 const Stack = createStackNavigator();
 
 const StackNavigator = () => {
-	const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.token);
+  //   const token = true;
+  return (
+    <Stack.Navigator>
+      {!token && (
+        <>
+          <Stack.Screen
+            name="Login"
+            component={LoginScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CheckMail"
+            component={CheckMail}
+            options={{
+              title: "Şifre Kurtarma",
+            }}
+          />
+        </>
+      )}
+      {token && (
+        <>
+          <Stack.Screen
+            name="Home"
+            component={DrawerNavigator}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen name="Profile" component={ProfileScreen} />
+          <Stack.Screen
+            name="Detail"
+            component={CategoryDetail}
+            options={{ title: "Kategori" }}
+          />
+          <Stack.Screen
+            name="ProductDetail"
+            component={ProductDetail}
+            options={{ title: "Ürün Detay" }}
+          />
 
-	return (
-		<Stack.Navigator>
-			{!token && (
-				<>
-					<Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
-					<Stack.Screen name='Register' component={RegisterScreen} options={{ headerShown: false }} />
-					<Stack.Screen
-						name='CheckMail'
-						component={CheckMail}
-						options={{
-							title: "Şifre Kurtarma",
-						}}
-					/>
-				</>
-			)}
-			{token && (
-				<>
-					<Stack.Screen name='Home' component={DrawerNavigator} options={{ headerShown: false }} />
-					<Stack.Screen name='Profile' component={ProfileScreen} />
-					<Stack.Screen name='Detail' component={CategoryDetail} options={{ title: "Kategori" }} />
-					<Stack.Screen name='ProductDetail' component={ProductDetail} options={{ title: "Ürün Detay" }} />
-
-					<Stack.Screen
-						name='Basket'
-						component={BasketScreen}
-						options={{
-							title: "Sepetim",
-						}}
-					/>
-				</>
-			)}
-		</Stack.Navigator>
-	);
+          <Stack.Screen
+            name="Basket"
+            component={BasketScreen}
+            options={{
+              title: "Sepetim",
+            }}
+          />
+        </>
+      )}
+    </Stack.Navigator>
+  );
 };
 
 export default StackNavigator;

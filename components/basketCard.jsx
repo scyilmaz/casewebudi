@@ -21,7 +21,6 @@ const BasketCard = ({ product }) => {
   const navigation = useNavigation();
   const quantity = product.quantity;
   const totalPrice = product.price * quantity;
-  const [showConfirmation, setShowConfirmation] = useState(false);
   const cart = useSelector((state) => state.basket);
   const cartItem = cart.items
     ? cart.items.find((item) => item.id === product.id)

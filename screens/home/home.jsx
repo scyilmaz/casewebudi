@@ -17,6 +17,7 @@ import { API_ROUTES } from "../../api/apiroutes";
 import { useSelector } from "react-redux";
 import Card from "../../components/card";
 import axios from "axios";
+import mockdata from "./fakeapi/mockdata.json";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -37,27 +38,38 @@ const HomeScreen = () => {
 
   const getProducts = async () => {
     try {
-      const response = await axios.get(`${API_ROUTES.products}?page=${page}`, {
-        headers: {
-          Authorization: `Bearer ${auth}`,
-        },
-      });
-      const responseData = response.data;
+      const useMockData = true;
 
-      setIsLoading(false);
-      setIsRefreshing(false);
-      setIsFetchingMore(false);
-      setTotalPages(responseData.products.last_page);
-
-      if (page === 1) {
-        setProducts(responseData.products.data);
+      if (useMockData) {
+        setProducts(mockdata);
+        setIsLoading(false);
       } else {
-        setProducts((prevProducts) => [
-          ...prevProducts,
-          ...responseData.products.data,
-        ]);
+        const response = await axios.get(
+          `${API_ROUTES.products}?page=${page}`,
+          {
+            headers: {
+              Authorization: `Bearer ${auth}`,
+            },
+          }
+        );
+        const responseData = response.data;
+
+        setIsLoading(false);
+        setIsRefreshing(false);
+        setIsFetchingMore(false);
+        setTotalPages(responseData.products.last_page);
+
+        if (page === 1) {
+          setProducts(responseData.products.data);
+        } else {
+          setProducts((prevProducts) => [
+            ...prevProducts,
+            ...responseData.products.data,
+          ]);
+        }
       }
     } catch (error) {
+      setIsLoading(false);
       Alert.alert("Hata", "Sunucuda beklenmedik bir sorun oluştu");
     }
   };
@@ -98,7 +110,6 @@ const HomeScreen = () => {
         >
           <Icon name="menu" style={styles.personIcon} />
         </TouchableOpacity>
-        <Text style={styles.personName}>{user.name}</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Basket")}>
           <BasketIconCount iconName="basket-outline" count={basketCount} />
         </TouchableOpacity>

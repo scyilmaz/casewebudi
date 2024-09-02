@@ -1,4 +1,4 @@
-const BASE_URL = "https://demoapi.webudi.tech/api";
+const BASE_URL = "apir";
 
 export const API_ROUTES = {
   register: `${BASE_URL}/register`,
